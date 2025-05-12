@@ -1,4 +1,3 @@
-import { SignedIn, UserButton } from '@clerk/clerk-react';
 import { supabase } from './lib/supabase';
 import { useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
@@ -29,13 +28,18 @@ function MainContent() {
   return (
     <div className="container">
       <div className="title-banner">
-        <h1>Los Precios del Mercado</h1>
+        <div className='info-title'>
+          <h1>Lista de Precios</h1>
+          <a href="https://api.whatsapp.com/send?phone=5493876291409" target="_blank" className="whatsapp-link">
+            <img src="/whatsapp.svg" alt="Whatsapp" className="whatsapp" />
+          </a>
+        </div>
         <span>Período: {new Date().toLocaleDateString()}</span>
       </div>
 
 
       <ul className="list">
-        {fruits.map((fruitso) => (
+        {fruits.filter(fruit => fruit.active).map((fruitso) => (
           <li className="list-item" key={fruitso.id}>
             <span className="product-name">
               {fruitso.name}
@@ -53,12 +57,6 @@ function MainContent() {
 export default function App() {
   return (
     <>
-      <header>
-        <SignedIn>
-          <UserButton />
-        </SignedIn>
-      </header>
-      
       <Routes>
         <Route path="/" element={<MainContent />} />
         <Route path="/admin" element={<AdminPage />} />

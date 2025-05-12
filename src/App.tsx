@@ -21,7 +21,7 @@ function MainContent() {
   }, []);
 
   async function getFruits() {
-    const { data } = await supabase.from("products").select();
+    const { data } = await supabase.from("products").select().order('name');
     console.log(data)
     setfruits(data as Fruit[]);
   }
@@ -33,11 +33,6 @@ function MainContent() {
         <span>Período: {new Date().toLocaleDateString()}</span>
       </div>
 
-      <div className="header">
-        <span>Producto</span>
-        <span>Unidad</span>
-        <span>Precio</span>
-      </div>
 
       <ul className="list">
         {fruits.map((fruitso) => (
@@ -47,7 +42,7 @@ function MainContent() {
             </span>
             <span className="unit">{fruitso.description}</span>
             <span className="price">${fruitso.price.toLocaleString('es-us')} 
-            <span className={`status-indicator status-${fruitso.trend || 'stable'}`}></span></span>
+            </span>
           </li>
         ))}
       </ul>

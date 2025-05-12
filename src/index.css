@@ -4,7 +4,7 @@ body{
 }
 .container {
   font-family: Arial, sans-serif;
-  max-width: 1200px;
+  max-width: 80%;
   margin: 20px auto;
   background-color: white;
   border-radius: 8px;
@@ -51,8 +51,7 @@ body{
 .list-item {
   display: grid;
   grid-template-columns: 1fr 150px 150px;
-  gap: 20px;
-  padding: 0px 5px;
+  padding: 5px;
   break-inside: avoid;
   margin-bottom: 8px;
 }
@@ -63,6 +62,11 @@ body{
 
 .list-item:nth-child(even) {
   background-color: #f8f8f8;
+}
+
+.list-item:nth-child(even):hover {
+  background-color: antiquewhite
+
 }
 
 .product-name {

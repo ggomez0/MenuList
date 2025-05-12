@@ -109,3 +109,64 @@ body{
 .status-stable {
   background-color: #FFC107;
 }
+
+.whatsapp-link {
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+
+.whatsapp-link:hover {
+  transform: scale(1.1);
+}
+
+.whatsapp {
+  width: 2rem;
+  height: 2rem;
+}
+
+.info-title{
+  display: flex;
+  gap: 1rem;
+}
+
+@media screen and (max-width: 768px) {
+
+  .title-banner {
+    display: block;
+    border-radius: 0;
+    padding: 10px 15px;
+  }
+
+  .title-banner h1 {
+    font-size: 20px;
+    margin-bottom: 8px;
+  }
+
+  ul.list {
+    column-count: 1;
+    column-gap: 0px;
+    padding: 10px;
+  }
+
+  .list-item {
+    grid-template-columns: 1.2fr 0.8fr 0.8fr;
+    gap: 8px;
+    padding: 8px 5px;
+  }
+
+  .product-name {
+    font-size: 0.9em;
+    white-space: normal;
+    line-height: 1.2;
+    overflow: visible;
+  }
+
+  .unit {
+    font-size: 0.85em;
+    text-align: left;
+  }
+
+  .price {
+    font-size: 0.9em;
+  }
+}

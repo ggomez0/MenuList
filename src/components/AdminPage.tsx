@@ -1,5 +1,4 @@
 import { useEffect, useState, type FormEvent } from 'react';
-import { SignedIn, SignedOut, SignInButton } from '@clerk/clerk-react';
 import { supabase } from '../lib/supabase';
 
 interface products {
@@ -107,9 +106,7 @@ export default function AdminPage() {
   return (
     <div className="admin-page">
       <h2>Administración</h2>
-      <SignedOut><SignInButton /></SignedOut>
-      <SignedIn>
-        <p>Estás logueado</p>
+      
         <form id="productForm" className="product-form" onSubmit={handleSubmit}>
           <input type="hidden" value={formData.id} />
           <div className="form-group">
@@ -175,7 +172,6 @@ export default function AdminPage() {
           </tbody>
         </table>
       </div>
-      </SignedIn>
     </div>
   );
 }

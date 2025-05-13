@@ -106,7 +106,7 @@ export default function AdminPage() {
 
   return (
     <div className="admin-page">
-      <h2>Administración</h2>
+      <h1 className='title-banner'>Administración</h1>
       
         <form id="productForm" className="product-form" onSubmit={handleSubmit}>
           <input type="hidden" value={formData.id} />
@@ -133,7 +133,7 @@ export default function AdminPage() {
           <button type="submit">Guardar</button>
         </form>
 
-        <div className="products-table">
+        <div className="container">
         <table>
           <thead>
             <tr>

@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import AdminPage from './components/AdminPage';
 import HeaderEnvio from './components/headerEnvio';
+import Header from './components/Header';
+import Fotter from './components/Fotter';
 import './index.css'
 
 interface Fruit {
@@ -30,37 +32,34 @@ function MainContent() {
 
   return (
     <>
+    <Header/>
+
     <HeaderEnvio/>
+
     <div className="container">
-      <div className="title-banner">
-        <div className='info-title'>
-          <h1>Lista de Precios</h1>
-          <a href="https://api.whatsapp.com/send?phone=5493876291409" target="_blank" className="whatsapp-link">
-            <img src="/whatsapp.svg" alt="Whatsapp" className="whatsapp" />
-          </a>
-        </div>
-        <span>Fecha: {new Date().toLocaleDateString()}</span>
-      </div>
-
-
       <ul className="list">
-        {fruits.filter(fruit => fruit.active).map((fruitso) => (
-          <li className="list-item" key={fruitso.id}>
-            <div className='section-product_name'>
-              <div className="circle_product" style={{ backgroundColor: `${fruitso.color}` }}></div>
-              <span className="product-name">
-                {fruitso.name}
-              </span>
+        {fruits.filter(fruit => fruit.active).map(({ id, color, name, description, price, trend }) => (
+          <li className="list-item" key={id}>
+            <div className="section-product_name">
+              <div className="circle_product" style={{ backgroundColor: color }}></div>
+              <span className="product-name">{name}</span>
             </div>
-            <span className="unit">{fruitso.description}</span>
-            <span className="price">${fruitso.price.toLocaleString('es-us')} 
-            <img alt='trend-direction' className='trend-price' src={`/${fruitso.trend}.svg`} />
-
+            <span className="unit">{description}</span>
+            <span className="price">
+              ${price.toLocaleString('es-AR')}
+              <img
+                alt="tendencia"
+                className="trend-price"
+                src={`/${trend}.svg`}
+              />
             </span>
-            </li>
+          </li>
         ))}
       </ul>
     </div>
+
+
+    <Fotter/>
   </>
   );
 }

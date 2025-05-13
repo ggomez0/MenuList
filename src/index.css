@@ -1,7 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
 * {
   margin: 0;
   padding: 0;
-  font-family: Arial, sans-serif;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
 }
 
 body {
@@ -39,6 +42,20 @@ body {
 .title-banner h1 {
   margin: 0;
   text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+button{
+  padding: 15px;
+  background-color: lightblue;
+  border-radius: 20px;
+  border: 0;
+}
+
+button:hover{
+  background-color: rgb(108, 195, 224);
+  cursor: pointer;
 }
 
 .header {
@@ -52,6 +69,89 @@ body {
   text-transform: uppercase;
 }
 
+.header-banner {
+  background-color: #5a4412;
+  color: white;
+  padding: 20px;
+  border-radius: 8px 8px 0 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.header-info {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.header-logo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.header-logo img {
+  width: 70px;
+}
+
+.header-title h1 {
+  font-size: 1.8rem;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.header-title h3 {
+  margin: 0;
+  font-weight: 400;
+  font-size: 1rem;
+}
+
+.factura {
+  background-color: #8a6e2f;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.header-contact {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 10px;
+}
+
+.header-contact .whatsapp-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: #25D366;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+}
+
+.header-contact .whatsapp-link:hover {
+  background-color: #1ebe5b;
+  transform: scale(1.05);
+}
+
+.header-contact .whatsapp {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.header-contact .date {
+  font-size: 0.9rem;
+  color: #e0e0e0;
+}
+
+
 .circle_product{
   width: 20px;
   height: 20px;
@@ -60,7 +160,9 @@ body {
 }
 
 .section-product_name {
-  display: -webkit-inline-box;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .trend-price{
@@ -147,6 +249,15 @@ body {
   gap: 1rem;
 }
 
+.footer{
+  background-color: #350808;
+  display: flex;
+  color: white;
+  padding: 9px;
+  justify-content: center;
+  margin-top: 5px;
+}
+
 .header-envio{
   background-color: #6d2222;
   display: flex;
@@ -186,7 +297,7 @@ h1 {
   border-radius: 0.5rem;
   box-shadow: 0 1px 3px rgba(0,0,0,0.1);
   margin-bottom: 2rem;
-  max-width: 1200px;
+  width: fit-content;
   margin: 0 auto;
 }
 
@@ -204,8 +315,7 @@ h1 {
 .form-group input,
 .form-group textarea {
   width: 100%;
-  padding: 0.5rem;
-  border: 1px solid #e5e7eb;
+  border: 1px solid black;
   border-radius: 0.375rem;
   font-size: 0.875rem;
 }
@@ -236,6 +346,7 @@ h1 {
   border-radius: 0.5rem;
   box-shadow: 0 1px 3px rgba(0,0,0,0.1);
   overflow-x: auto;
+  height: 400px;
 }
 
 table {
@@ -332,6 +443,101 @@ th {
     white-space: normal;
     line-height: 1.2;
     overflow: visible;
+  }
+
+  .unit {
+    font-size: 0.85em;
+    text-align: left;
+  }
+
+  .price {
+    font-size: 0.9em;
+  }
+}
+
+  .unit {
+    font-size: 0.85em;
+    text-align: left;
+  }
+
+  .price {
+    font-size: 0.9em;
+  }
+}
+
+  }
+}
+
+  .unit {
+    font-size: 0.85em;
+    text-align: left;
+  }
+
+  .price {
+    font-size: 0.9em;
+  }
+}
+
+  .unit {
+    font-size: 0.85em;
+    text-align: left;
+  }
+
+  .price {
+    font-size: 0.9em;
+  }
+}
+
+  .unit {
+    font-size: 0.85em;
+    text-align: left;
+  }
+
+  .price {
+    font-size: 0.9em;
+  }
+}
+
+
+  .title-banner {
+    display: block;
+    padding: 10px 15px;
+  }
+
+  .title-banner h1 {
+    font-size: 20px;
+    margin-bottom: 8px;
+  }
+
+  ul.list {
+    column-count: 1;
+    column-gap: 0px;
+    padding: 10px;
+  }
+
+  .list-item {
+    grid-template-columns: 1.2fr 0.8fr 0.8fr;
+    gap: 8px;
+    padding: 8px 5px;
+  }
+
+  .product-name {
+    font-size: 0.9em;
+    white-space: normal;
+    line-height: 1.2;
+    overflow: visible;
+  }
+
+  .unit {
+    font-size: 0.85em;
+    text-align: left;
+  }
+
+  .price {
+    font-size: 0.9em;
+  }
+}
+
   }
 
   .unit {

@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import AdminPage from './components/AdminPage';
 import HeaderEnvio from './components/headerEnvio';
+import './index.css'
 
 interface Fruit {
   id: string;
@@ -53,7 +54,7 @@ function MainContent() {
             </div>
             <span className="unit">{fruitso.description}</span>
             <span className="price">${fruitso.price.toLocaleString('es-us')} 
-            <img alt='trend-direction' className='trend-price' src={`./public/${fruitso.trend}.svg`} />
+            <img alt='trend-direction' className='trend-price' src={`/${fruitso.trend}.svg`} />
 
             </span>
             </li>

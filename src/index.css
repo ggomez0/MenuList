@@ -1,13 +1,18 @@
-body{
+* {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+body {
   background-color: aliceblue;
   background-image: url(/public/background.png);
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-size: cover;
-  
 }
+
 .container {
-  font-family: Arial, sans-serif;
   max-width: 80%;
   margin: 20px auto;
   background-color: white;
@@ -131,6 +136,34 @@ body{
 .info-title{
   display: flex;
   gap: 1rem;
+}
+
+.header-envio{
+  background-color: #6d2222;
+  display: flex;
+  color: white;
+  padding: 9px;
+  justify-content: center;
+  margin-bottom: 5px;
+}
+
+.header-envio_icon{
+  color: #ffffff;
+  margin-right: 10px;
+  animation: bounce 2s infinite;
+}
+
+.header-envio_title{
+  color: rgb(255, 255, 255);
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
 }
 
 @media screen and (max-width: 768px) {

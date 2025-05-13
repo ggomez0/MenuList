@@ -2,6 +2,7 @@ import { supabase } from './lib/supabase';
 import { useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import AdminPage from './components/AdminPage';
+import HeaderEnvio from './components/headerEnvio';
 
 interface Fruit {
   id: string;
@@ -26,6 +27,8 @@ function MainContent() {
   }
 
   return (
+    <>
+    <HeaderEnvio/>
     <div className="container">
       <div className="title-banner">
         <div className='info-title'>
@@ -34,7 +37,7 @@ function MainContent() {
             <img src="/whatsapp.svg" alt="Whatsapp" className="whatsapp" />
           </a>
         </div>
-        <span>Período: {new Date().toLocaleDateString()}</span>
+        <span>Fecha: {new Date().toLocaleDateString()}</span>
       </div>
 
 
@@ -51,6 +54,7 @@ function MainContent() {
         ))}
       </ul>
     </div>
+  </>
   );
 }
 

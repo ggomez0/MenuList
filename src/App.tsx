@@ -6,11 +6,12 @@ import HeaderEnvio from './components/headerEnvio';
 
 interface Fruit {
   id: string;
+  color: string;
   name: string;
   description: string;
   price: number;
   active: boolean;
-  trend?: 'up' | 'down' | 'stable';
+  trend: 'up' | 'down' | 'stable';
 }
 
 function MainContent() {
@@ -44,13 +45,18 @@ function MainContent() {
       <ul className="list">
         {fruits.filter(fruit => fruit.active).map((fruitso) => (
           <li className="list-item" key={fruitso.id}>
-            <span className="product-name">
-              {fruitso.name}
-            </span>
+            <div className='section-product_name'>
+              <div className="circle_product" style={{ backgroundColor: `#${fruitso.color}` }}></div>
+              <span className="product-name">
+                {fruitso.name}
+              </span>
+            </div>
             <span className="unit">{fruitso.description}</span>
             <span className="price">${fruitso.price.toLocaleString('es-us')} 
+            <img alt='trend-direction' className='trend-price' src={`./public/${fruitso.trend}.svg`} />
+
             </span>
-          </li>
+            </li>
         ))}
       </ul>
     </div>

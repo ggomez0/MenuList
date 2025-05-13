@@ -21,6 +21,11 @@ body {
   padding-bottom: 20px;
 }
 
+.logo{
+  justify-content: center;
+  width: 250px;
+}
+
 .title-banner {
   background-color: #E91E63;
   color: white;
@@ -33,7 +38,6 @@ body {
 
 .title-banner h1 {
   margin: 0;
-  font-size: 24px;
   text-transform: uppercase;
 }
 
@@ -46,6 +50,23 @@ body {
   padding: 10px 20px;
   font-weight: bold;
   text-transform: uppercase;
+}
+
+.circle_product{
+  width: 20px;
+  height: 20px;
+  border-radius: 20px;
+  margin-right: 10px;
+}
+
+.section-product_name {
+  display: -webkit-inline-box;
+}
+
+.trend-price{
+  width: 20px;
+  height: 20px;  
+  margin-left: 13px;
 }
 
 .list {

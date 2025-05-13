@@ -70,7 +70,7 @@ export default function App() {
     <>
       <Routes>
         <Route path="/" element={<MainContent />} />
-        <Route path="/admin" element={<AdminPage />} />
+        <Route path="/morena-admin" element={<AdminPage />} />
       </Routes>
     </>
   );

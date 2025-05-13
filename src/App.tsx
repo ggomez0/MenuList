@@ -47,7 +47,7 @@ function MainContent() {
         {fruits.filter(fruit => fruit.active).map((fruitso) => (
           <li className="list-item" key={fruitso.id}>
             <div className='section-product_name'>
-              <div className="circle_product" style={{ backgroundColor: `#${fruitso.color}` }}></div>
+              <div className="circle_product" style={{ backgroundColor: `${fruitso.color}` }}></div>
               <span className="product-name">
                 {fruitso.name}
               </span>

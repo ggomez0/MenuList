@@ -79,6 +79,7 @@ export default function AdminPage() {
       name: formData.name,
       description: formData.description,
       price: parseFloat(formData.price),
+      color: formData.color,
       active: formData.active,
       updated_at: new Date().toISOString()
     };

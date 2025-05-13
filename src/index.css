@@ -299,7 +299,7 @@ th {
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1400px) {
   .container{
     max-width: 89%;
     margin: 0 auto;

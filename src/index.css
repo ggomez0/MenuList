@@ -214,7 +214,6 @@ h1 {
 .form-group textarea:focus {
   outline: none;
   border-color: #2563eb;
-  ring: 2px #93c5fd;
 }
 
 .primary-btn {

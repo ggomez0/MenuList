@@ -1,5 +1,7 @@
 # MenuList - Lista de Precios
 
+![image](https://github.com/user-attachments/assets/30a381d0-b525-4f48-9b78-cfa2c9c54bd1)
+
 ## Descripción del Proyecto
 
 MenuList es una aplicación web desarrollada con React y TypeScript que permite a la frutería gestionar y mostrar su catálogo de productos de manera dinámica y atractiva. La aplicación utiliza Supabase como backend para almacenar y gestionar los datos de los productos.

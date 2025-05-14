@@ -1,6 +1,7 @@
 import { supabase } from './lib/supabase';
 import { useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
+import { Analytics } from '@vercel/analytics/react';
 import AdminPage from './components/AdminPage';
 import HeaderEnvio from './components/headerEnvio';
 import Header from './components/Header';
@@ -71,6 +72,7 @@ export default function App() {
         <Route path="/" element={<MainContent />} />
         <Route path="/morena-admin" element={<AdminPage />} />
       </Routes>
-    </>
+      <Analytics />
+    </>  
   );
 }

@@ -1,54 +1,68 @@
-# React + TypeScript + Vite
+# MenuList - Lista de Precios
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Descripción del Proyecto
 
-Currently, two official plugins are available:
+MenuList es una aplicación web desarrollada con React y TypeScript que permite a la frutería gestionar y mostrar su catálogo de productos de manera dinámica y atractiva. La aplicación utiliza Supabase como backend para almacenar y gestionar los datos de los productos.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Funcionalidades Principales
 
-## Expanding the ESLint configuration
+### 1. Visualización de Productos
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+La página principal (`MainContent` en `App.tsx`) muestra una lista de productos activos con:
+- Nombre del producto con un círculo de color personalizado
+- Descripción o unidad de venta
+- Precio
+- Indicador visual de tendencia de precio (subiendo, bajando o estable)
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+Los productos se obtienen de Supabase y se filtran para mostrar solo los activos.
+
+### 2. Administración de Productos
+
+El panel de administración (`AdminPage.tsx`) permite:
+
+- **Crear nuevos productos**: Formulario para ingresar nombre, descripción, color, precio y estado activo.
+- **Editar productos existentes**: Modificar cualquier campo de un producto.
+- **Eliminar productos**: Eliminar productos con confirmación.
+- **Visualizar historial**: Ver la fecha de última actualización de cada producto.
+
+## Modelo de Datos
+
+La aplicación utiliza la siguiente estructura de datos para los productos:
+
+```typescript
+interface Fruit {
+  id: string;          
+  color: string;      
+  name: string;        
+  description: string;  
+  price: number;        
+  active: boolean;    
+  trend: 'up' | 'down' | 'stable'; 
+  updated_at: string; 
+}
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Instalación y Configuración
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+1. **Clonar el repositorio**:
+   ```bash
+   git clone https://github.com/ggomez0/MenuList
+   cd MenuList
+   ```
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+2. **Instalar dependencias**:
+   ```bash
+   npm install
+   ```
+
+3. **Configurar variables de entorno**:
+   Crear un archivo `.env` con las siguientes variables:
+   ```
+   VITE_SUPABASE_URL=<url-de-supabase>
+   VITE_SUPABASE_ANON_KEY=<clave-anónima-de-supabase>
+   ```
+
+4. **Iniciar el servidor de desarrollo**:
+   ```bash
+   npm run dev
+   ```

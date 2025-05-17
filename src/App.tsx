@@ -4,8 +4,9 @@ import { Routes, Route } from 'react-router-dom';
 import { Analytics } from '@vercel/analytics/react';
 import AdminPage from './components/AdminPage';
 import HeaderEnvio from './components/headerEnvio';
+import NotFound from './components/NotFound';
 import Header from './components/Header';
-import Fotter from './components/Fotter';
+import Footer from './components/Footer';
 import './index.css'
 
 interface Fruit {
@@ -60,7 +61,7 @@ function MainContent() {
     </div>
 
 
-    <Fotter/>
+    <Footer/>
   </>
   );
 }
@@ -71,6 +72,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<MainContent />} />
         <Route path="/morena-admin" element={<AdminPage />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
       <Analytics />
     </>  

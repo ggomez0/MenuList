@@ -29,6 +29,7 @@ export default function AdminPage() {
     price: "",
     active: true
   });
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     fetchProducts();
@@ -59,6 +60,8 @@ export default function AdminPage() {
         active: product.active
       });
     }
+    const dialog = document.querySelector('dialog');
+    dialog?.showModal();
   };
 
   const handleDelete = async (id: string) => {
@@ -102,12 +105,33 @@ export default function AdminPage() {
     } else {
       alert('Error al guardar el producto');
     }
+
+    handleCloseDialog();
   };
+
+  const handleOpenDialog = () => {
+    setFormData({ id: '', name: '', color: '#ff0000', description: '', price: '', active: true });
+    const dialog = document.querySelector('dialog');
+    dialog?.showModal();
+  };
+
+  const handleCloseDialog = () => {
+    const dialog = document.querySelector('dialog');
+    dialog?.close();
+  }
+
+  const filteredProducts = products.filter(p =>
+    p.name.toLowerCase().includes(search.toLowerCase())
+  );
 
   return (
     <div className="admin-page">
-      <h1 className='title-banner'>Administración</h1>
-      
+      <div className="title-banner">
+        <h1>Administración</h1>
+        <button className="add-product-btn" onClick={() => handleOpenDialog()}>Agregar Producto</button>
+      </div>
+
+      <dialog>
         <form id="productForm" className="product-form" onSubmit={handleSubmit}>
           <input type="hidden" value={formData.id} />
           <div className="form-group">
@@ -126,15 +150,24 @@ export default function AdminPage() {
             <label>Precio:</label>
             <input type="number" value={formData.price} onChange={e => setFormData({ ...formData, price: e.target.value })} step="0.01" required />
           </div>
-          <div className="form-group">
+          <div className="form-group checkbox-group">
             <label>Activo:</label>
             <input type="checkbox" checked={formData.active} onChange={e => setFormData({ ...formData, active: e.target.checked })} />
           </div>
-          <button type="submit">Guardar</button>
+          <button type="button" className='close-dialog' onClick={() => handleCloseDialog()}>Cancelar</button>
+          <button type="submit" className='add-product-btn'>Guardar</button>
         </form>
+      </dialog>
 
-        <div className="container">
-        <table>
+      <div className="container">
+        <input
+          type="text"
+          placeholder="Buscar producto..."
+          value={search}
+          onChange={e => setSearch(e.target.value)}
+          className="search-bar"
+        />
+        <div className="products-table">
           <thead>
             <tr>
               <th>Nombre</th>
@@ -146,7 +179,7 @@ export default function AdminPage() {
             </tr>
           </thead>
           <tbody>
-            {products?.map(product => (
+            {filteredProducts?.map(product => (
               <tr>
                 <td>{product.name}</td>
                 <td>{product.description}</td>
@@ -171,8 +204,8 @@ export default function AdminPage() {
               </tr>
             ))}
           </tbody>
-        </table>
-      </div>
+        </div>
     </div>
+  </div>
   );
 }

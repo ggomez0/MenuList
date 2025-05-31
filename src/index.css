@@ -9,7 +9,7 @@
 
 body {
   background-color: aliceblue;
-  background-image: url(/public/background.png);
+  background-image: url(/background.png);
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-size: cover;
@@ -18,7 +18,6 @@ body {
 .container {
   max-width: 80%;
   margin: 20px auto;
-  background-color: white;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding-bottom: 20px;
@@ -316,6 +315,7 @@ h1 {
 .form-group textarea {
   width: 100%;
   border: 1px solid black;
+  padding-left:0.3rem;
   border-radius: 0.375rem;
   font-size: 0.875rem;
 }
@@ -324,6 +324,12 @@ h1 {
 .form-group textarea:focus {
   outline: none;
   border-color: #2563eb;
+}
+
+.checkbox-group {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 
 .primary-btn {
@@ -343,28 +349,75 @@ h1 {
 
 .products-table {
   background: white;
+  border-radius: 0.75rem;
+  box-shadow: 0 2px 8px rgba(16, 30, 54, 0.08);
+  overflow-x: auto;
+  border: 1px solid #e5e7eb;
+  height: 500px;
+  overflow-y: auto;
+}
+
+dialog {
   border-radius: 0.5rem;
   box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-  overflow-x: auto;
-  height: 400px;
+}
+
+::backdrop {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.add-product-btn {
+  background: #4ade80;
+  color: white;
+}
+
+.close-dialog{
+  background: #f87171;
+  color: white;
+  margin-right: 20px;
 }
 
 table {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: white;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  font-size: 1rem;
 }
 
 th, td {
-  padding: 1rem;
+  padding: 0.9rem 1rem;
   text-align: left;
-  border-bottom: 1px solid #e5e7eb;
-  font-size: 0.875rem;
+  font-size: 1rem;
 }
 
 th {
-  background: #f8fafc;
-  color: #4b5563;
+  background: #fafafa;
+  color: #22223b;
   font-weight: 600;
+  border-bottom: 1.5px solid #e5e7eb;
+  letter-spacing: 0.03em;
+  text-transform: none;
+}
+
+tbody tr {
+  border-bottom: 1px solid #f1f1f1;
+  transition: background 0.18s;
+}
+
+tbody tr:last-child {
+  border-bottom: none;
+}
+
+tbody tr:hover {
+  background: #f3f4f6;
+}
+
+td {
+  color: #3a3a3a;
+  vertical-align: middle;
 }
 
 .actions {
@@ -373,32 +426,45 @@ th {
 }
 
 .edit-btn, .delete-btn {
-  padding: 0.5rem;
+  padding: 0.35rem 0.7rem;
   border: none;
   border-radius: 0.375rem;
   cursor: pointer;
-  transition: background-color 0.2s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.edit-btn {
-  background: #eef2ff;
+  font-size: 0.97rem;
+  font-weight: 500;
+  transition: background 0.18s, color 0.18s, box-shadow 0.18s;
+  background: #f4f4f5;
   color: #4f46e5;
+  box-shadow: none;
 }
 
 .edit-btn:hover {
   background: #e0e7ff;
+  color: #3730a3;
 }
 
 .delete-btn {
   background: #fef2f2;
   color: #dc2626;
 }
-
 .delete-btn:hover {
   background: #fee2e2;
+  color: #b91c1c;
+}
+
+.search-bar {
+  padding: 0.6rem 1rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  outline: none;
+  transition: border 0.2s;
+  margin-bottom: 0.5rem;
+  width: 250px;
+  background: #ffffff;
+}
+.search-bar:focus {
+  border: 1.5px solid #E91E63;
 }
 
 @keyframes bounce {
@@ -544,4 +610,3 @@ th {
   transform: translateY(-3px);
   box-shadow: 0 5px 15px rgba(233, 30, 99, 0.3);
 }
-  

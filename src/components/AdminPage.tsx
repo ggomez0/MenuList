@@ -158,15 +158,14 @@ export default function AdminPage() {
           <button type="submit" className='add-product-btn'>Guardar</button>
         </form>
       </dialog>
-
-      <div className="container">
-        <input
-          type="text"
-          placeholder="Buscar producto..."
-          value={search}
-          onChange={e => setSearch(e.target.value)}
-          className="search-bar"
+      <input
+        type="text"
+        placeholder="Buscar producto..."
+        value={search}
+        onChange={e => setSearch(e.target.value)}
+        className="search-bar"
         />
+      <div className="container">
         <div className="products-table">
           <thead>
             <tr>

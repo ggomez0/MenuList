@@ -2,6 +2,7 @@ import { supabase } from './lib/supabase';
 import { useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from "@vercel/speed-insights/react"
 import AdminPage from './components/AdminPage';
 import HeaderEnvio from './components/headerEnvio';
 import NotFound from './components/NotFound';
@@ -75,6 +76,7 @@ export default function App() {
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Analytics />
+      <SpeedInsights/>
     </>  
   );
 }

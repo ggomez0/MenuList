@@ -1,5 +1,7 @@
 import { useEffect, useState, type FormEvent } from 'react';
 import { supabase } from '../lib/supabase';
+import type { Session } from '@supabase/supabase-js';
+import Login from './Login';
 
 interface products {
   id: string;
@@ -30,10 +32,29 @@ export default function AdminPage() {
     active: true
   });
   const [search, setSearch] = useState("");
+  const [session, setSession] = useState<Session | null>(null)
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session)
+    })
+    supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session)
+    })
+  }, [])
 
   useEffect(() => {
     fetchProducts();
   }, []);
+
+  const handleLogout = async () => {
+    const { error } = await supabase.auth.signOut();
+    if (error) {
+      alert('Error al cerrar sesión');
+    } else {
+      setSession(null);
+    }
+  }
 
   async function fetchProducts() {
     const { data } = await supabase
@@ -125,10 +146,13 @@ export default function AdminPage() {
   );
 
   return (
+    (!session ? 
+      <Login /> :      
+
     <div className="admin-page">
       <div className="title-banner">
         <h1>Administración</h1>
-        <button className="add-product-btn" onClick={() => handleOpenDialog()}>Agregar Producto</button>
+        <button className="logout-btn" onClick={handleLogout}>Salir</button>
       </div>
 
       <dialog>
@@ -158,13 +182,28 @@ export default function AdminPage() {
           <button type="submit" className='add-product-btn'>Guardar</button>
         </form>
       </dialog>
-      <input
-        type="text"
-        placeholder="Buscar producto..."
-        value={search}
-        onChange={e => setSearch(e.target.value)}
-        className="search-bar"
+
+      <div className='search-bar-container' style={{ display: 'flex', gap: '1rem', alignItems: 'center', marginBottom: '1.5rem' }}>
+        <input
+          id="search-product"
+          type="text"
+          placeholder="Buscar producto..."
+          value={search}
+          onChange={e => setSearch(e.target.value)}
+          className="search-bar"
+          autoComplete="off"
+          style={{ flex: 1, minWidth: 0 }}
         />
+        <button
+          className="add-product-btn"
+          onClick={handleOpenDialog}
+          aria-label="Agregar Producto"
+          type="button"
+        >          
+          Agregar Producto
+        </button>
+      </div>
+
       <div className="container">
         <div className="products-table">
           <thead>
@@ -206,5 +245,6 @@ export default function AdminPage() {
         </div>
     </div>
   </div>
+    )
   );
 }

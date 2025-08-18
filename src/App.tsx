@@ -27,6 +27,13 @@ function MainContent() {
     getFruits();
   }, []);
 
+  useEffect(() => {
+    const handler = () => window.print();
+    const btn = document.getElementById('DownloadButton');
+    btn?.addEventListener('click', handler);
+    return () => btn?.removeEventListener('click', handler);
+  }, []);
+
   async function getFruits() {
     const { data } = await supabase.from("products").select().order('name');
     console.log(data)

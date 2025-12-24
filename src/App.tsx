@@ -1,4 +1,4 @@
-import { supabase } from './lib/supabase';
+import { turso } from './lib/turso';
 import { useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { Analytics } from '@vercel/analytics/react';
@@ -35,9 +35,12 @@ function MainContent() {
   }, []);
 
   async function getFruits() {
-    const { data } = await supabase.from("products").select().order('name');
-    console.log(data)
-    setfruits(data as Fruit[]);
+    try {
+      const { rows } = await turso.execute("SELECT * FROM products ORDER BY name");
+      setfruits(rows as unknown as Fruit[]);
+    } catch (error) {
+      console.error("Error fetching fruits:", error);
+    }
   }
 
   return (

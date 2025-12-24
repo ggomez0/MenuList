@@ -1,7 +1,6 @@
 import { useEffect, useState, type FormEvent } from 'react';
-import { supabase } from '../lib/supabase';
-import type { Session } from '@supabase/supabase-js';
-import Login from './Login';
+import { tursoAdmin } from '../lib/turso';
+import { SignedIn, SignedOut, RedirectToSignIn, UserButton } from "@clerk/clerk-react";
 
 interface products {
   id: string;
@@ -31,45 +30,26 @@ export default function AdminPage() {
     price: "",
     active: true
   });
-  const [search, setSearch] = useState("");
-  const [session, setSession] = useState<Session | null>(null)
 
-  useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session)
-    })
-    supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session)
-    })
-  }, [])
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     fetchProducts();
   }, []);
 
-  const handleLogout = async () => {
-    const { error } = await supabase.auth.signOut();
-    if (error) {
-      alert('Error al cerrar sesión');
-    } else {
-      setSession(null);
-    }
-  }
+
 
   async function fetchProducts() {
-    const { data } = await supabase
-      .from('products')
-      .select('*')
-      .order('updated_at', { ascending: false });
-    setProducts(data || []);
+    const { rows } = await tursoAdmin.execute("SELECT * FROM products ORDER BY updated_at DESC");
+    setProducts(rows.map(r => ({ ...r, active: Boolean(r.active) })) as unknown as products[]);
   }
 
   const handleEdit = async (id: string) => {
-    const { data: product } = await supabase
-      .from('products')
-      .select()
-      .eq('id', id)
-      .single();
+    const { rows } = await tursoAdmin.execute({
+      sql: "SELECT * FROM products WHERE id = ?",
+      args: [id]
+    });
+    const product = rows[0] as unknown as products;
     
     if (product) {
       setFormData({
@@ -77,7 +57,7 @@ export default function AdminPage() {
         color:product.color,
         name: product.name,
         description: product.description,
-        price: product.price,
+        price: product.price.toString(),
         active: product.active
       });
     }
@@ -87,11 +67,14 @@ export default function AdminPage() {
 
   const handleDelete = async (id: string) => {
     if (confirm('¿Estás seguro de que deseas eliminar este producto?')) {
-      const { error } = await supabase.from('products').delete().eq('id', id);
-      if (!error) {
+      try {
+        await tursoAdmin.execute({
+          sql: "DELETE FROM products WHERE id = ?",
+          args: [id]
+        });
         fetchProducts();
-      } else {
-        alert('Error al eliminar el producto');
+      } catch (error) {
+        alert(error);
       }
     }
   };
@@ -108,22 +91,21 @@ export default function AdminPage() {
       updated_at: new Date().toISOString()
     };
 
-    let error;
-    if (formData.id) {
-      ({ error } = await supabase
-        .from('products')
-        .update(payload)
-        .eq('id', formData.id));
-    } else {
-      ({ error } = await supabase
-        .from('products')
-        .insert([payload]));
-    }
-
-    if (!error) {
+    try {
+      if (formData.id) {
+        await tursoAdmin.execute({
+          sql: "UPDATE products SET name = ?, description = ?, price = ?, color = ?, active = ?, updated_at = ? WHERE id = ?",
+          args: [payload.name, payload.description, payload.price, payload.color, payload.active ? 1 : 0, payload.updated_at, formData.id]
+        });
+      } else {
+        await tursoAdmin.execute({
+          sql: "INSERT INTO products (name, description, price, color, active, updated_at) VALUES (?, ?, ?, ?, ?, ?)",
+          args: [payload.name, payload.description, payload.price, payload.color, payload.active ? 1 : 0, payload.updated_at]
+        });
+      }
       setFormData({ id: '', name: '', color:'', description: '', price: '', active: true });
       fetchProducts();
-    } else {
+    } catch (e) {
       alert('Error al guardar el producto');
     }
 
@@ -146,14 +128,16 @@ export default function AdminPage() {
   );
 
   return (
-    (!session ? 
-      <Login /> :      
-
-    <div className="admin-page">
-      <div className="title-banner">
-        <h1>Administración</h1>
-        <button className="logout-btn" onClick={handleLogout}>Salir</button>
-      </div>
+    <>
+      <SignedOut>
+        <RedirectToSignIn />
+      </SignedOut>
+      <SignedIn>
+        <div className="admin-page">
+          <div className="title-banner">
+            <h1>Administración</h1>
+            <UserButton />
+          </div>
 
       <dialog>
         <form id="productForm" className="product-form" onSubmit={handleSubmit}>
@@ -245,6 +229,7 @@ export default function AdminPage() {
         </div>
     </div>
   </div>
-    )
+    </SignedIn>
+    </>
   );
 }

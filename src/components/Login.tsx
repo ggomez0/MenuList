@@ -1,7 +1,10 @@
 import { useState } from 'react'
-import { supabase } from '../lib/supabase'
 
-export default function Login() {
+interface Props {
+  onLogin: () => void;
+}
+
+export default function Login({ onLogin }: Props) {
   const [loading, setLoading] = useState(false)
   const [password, setPassword] = useState('')
   const [errorMsg, setErrorMsg] = useState('')
@@ -11,15 +14,14 @@ export default function Login() {
     setLoading(true)
     setErrorMsg('')
 
-    const { error } = await supabase.auth.signInWithPassword({
-      email: 'a@a.com',
-      password,
-    })
-
-    if (error) {
-      setErrorMsg('Contraseña incorrecta')
+    if (password === import.meta.env.VITE_PASSWORD) {
+      setLoading(false)
+      onLogin()
     }
-    setLoading(false)
+    else {
+      setErrorMsg('Contraseña incorrecta')
+      setLoading(false)
+    }
   }
 
   return (
